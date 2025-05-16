@@ -2,44 +2,45 @@ import requests
 import random
 import psycopg2
 
-HOSTNAME = 'localhost'
-USERNAME = 'postgres'
-PASSWORD = 'postgres'
-DATABASE = 'your_database_name' 
+USER = 'postgres'
+PASSWORD = 'Amine@22'
+DB_NAME = 'countries' 
+HOST = "localhost"
+PORT = "5432"
 
-url = "https://restcountries.com/v3.1/all"
-response = requests.get(url)
-if response.status_code != 200:
-    raise Exception("Failed to fetch data from API")
-countries_data = response.json()
+def fetch_countries():
+    url = "https://restcountries.com/v3.1/all"
+    response = requests.get(url)
+    return response.json()
 
-selected_countries = random.sample(countries_data, 10)
-
-conn = psycopg2.connect(
-    host=HOSTNAME,
-    user=USERNAME,
-    password=PASSWORD,
-    dbname=DATABASE
-)
-cursor = conn.cursor()
-
-for country in selected_countries:
+def insert_country_to_db(name, capital, flag, subregion, population):
     try:
+        conn = psycopg2.connect(dbname=DB_NAME, user=USER, password=PASSWORD, host=HOST, port=PORT)
+        cursor = conn.cursor()
+        query = """
+        INSERT INTO countries (name, capital, flag, subregion, population)
+        VALUES (%s, %s, %s, %s, %s);
+        """
+        cursor.execute(query, (name, capital, flag, subregion, population))
+        conn.commit()
+    except Exception as e:
+        print("Error inserting data:", e)
+    finally:
+        conn.close()
+
+def main():
+    data = fetch_countries()
+    selected = random.sample(data, 10)
+
+    for country in selected:
         name = country.get("name", {}).get("common", "Unknown")
-        capital = country.get("capital", ["Unknown"])[0]
+        capital = country.get("capital", ["Unknown"])[0] if country.get("capital") else "Unknown"
         flag = country.get("flags", {}).get("png", "")
         subregion = country.get("subregion", "Unknown")
         population = country.get("population", 0)
 
-        cursor.execute("""
-            INSERT INTO countries (name, capital, flag, subregion, population)
-            VALUES (%s, %s, %s, %s, %s)
-        """, (name, capital, flag, subregion, population))
-    except Exception as e:
-        print(f"❌ Error inserting {name}: {e}")
+        insert_country_to_db(name, capital, flag, subregion, population)
+        print(f"Inserted: {name}")
 
-conn.commit()
-cursor.close()
-conn.close()
-
-print("✅ 10 random countries inserted successfully.")
+if __name__ == "__main__":
+    main()
