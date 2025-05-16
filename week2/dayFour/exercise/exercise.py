@@ -6,6 +6,7 @@ DB_NAME = "restaurant"
 USER = "postgres"
 PASSWORD = "Amine@22"
 HOST = "localhost"
+PORT = "5432"
 
 class MenuItem:
     def __init__(self, name, price):
@@ -13,7 +14,7 @@ class MenuItem:
         self.item_price = price
 
     def save(self):
-        connection = psycopg2.connect(dbname=DB_NAME, user=USER, password=PASSWORD, host=HOST)
+        connection = psycopg2.connect(dbname=DB_NAME, user=USER, password=PASSWORD, host=HOST, port=PORT)
         cursor = connection.cursor()
         query = "INSERT INTO Menu_Items (item_name, item_price) VALUES (%s, %s)"
         cursor.execute(query, (self.item_name, self.item_price))
@@ -21,7 +22,7 @@ class MenuItem:
         connection.close()
 
     def delete(self):
-        connection = psycopg2.connect(dbname=DB_NAME, user=USER, password=PASSWORD, host=HOST)
+        connection = psycopg2.connect(dbname=DB_NAME, user=USER, password=PASSWORD, host=HOST, port=PORT)
         cursor = connection.cursor()
         query = "DELETE FROM Menu_Items WHERE item_name = %s"
         cursor.execute(query, (self.item_name,))
@@ -29,7 +30,7 @@ class MenuItem:
         connection.close()
 
     def update(self, new_name, new_price):
-        connection = psycopg2.connect(dbname=DB_NAME, user=USER, password=PASSWORD, host=HOST)
+        connection = psycopg2.connect(dbname=DB_NAME, user=USER, password=PASSWORD, host=HOST, port=PORT)
         cursor = connection.cursor()
         query = "UPDATE Menu_Items SET item_name = %s, item_price = %s WHERE item_name = %s"
         cursor.execute(query, (new_name, new_price, self.item_name))
@@ -45,12 +46,13 @@ DB_NAME = "restaurant"
 USER = "postgres"
 PASSWORD = "Amine@22"
 HOST = "localhost"
+PORT = "5432"
 
 class MenuManager:
 
     @classmethod
     def get_by_name(cls, item_name):
-        connection = psycopg2.connect(dbname=DB_NAME, user=USER, password=PASSWORD, host=HOST)
+        connection = psycopg2.connect(dbname=DB_NAME, user=USER, password=PASSWORD, host=HOST, port=PORT)
         cursor = connection.cursor()
         query = "SELECT item_name, item_price FROM Menu_Items WHERE item_name = %s"
         cursor.execute(query, (item_name,))
@@ -114,18 +116,18 @@ def add_item_to_menu():
     try:
         item = MenuItem(name, int(price))
         item.save()
-        print("✅ Item was added successfully!")
+        print("Item was added successfully!")
     except Exception as e:
-        print("❌ Error adding item:", e)
+        print("Error adding item:", e)
 
 def remove_item_from_menu():
     name = input("Enter the name of the item to delete: ")
     item = MenuManager.get_by_name(name)
     if item:
         item.delete()
-        print("✅ Item was deleted successfully!")
+        print("Item was deleted successfully!")
     else:
-        print("❌ Error: Item not found.")
+        print("Error: Item not found.")
 
 def update_item_from_menu():
     old_name = input("Enter the name of the item to update: ")
@@ -135,21 +137,20 @@ def update_item_from_menu():
         new_price = input("Enter the new price: ")
         try:
             old_item.update(new_name, int(new_price))
-            print("✅ Item was updated successfully!")
+            print("Item was updated successfully!")
         except Exception as e:
-            print("❌ Error updating item:", e)
+            print("Error updating item:", e)
     else:
-        print("❌ Error: Item not found.")
+        print("Error: Item not found.")
 
 def show_restaurant_menu():
     items = MenuManager.all_items()
     if not items:
-        print("🚫 The menu is currently empty.")
+        print("The menu is currently empty.")
         return
     print("\n=== Restaurant Menu ===")
     for item in items:
         print(f"{item.name} - {item.price}₪")
 
-# Run the program
 if __name__ == "__main__":
     show_user_menu()
