@@ -4,7 +4,6 @@ const newTaskInput = document.getElementById('newTask');
 const taskList = document.getElementById('taskList');
 const clearBtn = document.getElementById('clearBtn');
 
-        // Render initial tasks
 renderTasks();
 
 function addTask(event) {
@@ -31,7 +30,7 @@ function renderTasks() {
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         checkbox.id = `task-${index}`;
-        checkbox.checked = true; // Mark all initial tasks as completed
+        checkbox.checked = true;
                 
         const label = document.createElement('label');
         label.htmlFor = `task-${index}`;
