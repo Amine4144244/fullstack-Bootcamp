@@ -1,0 +1,1 @@
+// the out put should be: [1, 2, 0, 1, 2, 3]

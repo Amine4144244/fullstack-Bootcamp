@@ -1,0 +1,1 @@
+// the output will be: [2, 4, 6]
