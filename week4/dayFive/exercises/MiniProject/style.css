@@ -1,0 +1,53 @@
+body {
+  background: url('/week4/dayFive/exercises/MiniProject/images/circuit-pattern.png') repeat;
+  text-align: center;
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+}
+
+.header {
+  background-color: #66ff99;
+  padding: 20px;
+}
+
+#searchBox {
+  width: 300px;
+  padding: 10px;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+#cardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  background: url('/week4/dayFive/exercises/MiniProject/images/card-pattern.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-color: #4fbcc1;
+  border-radius: 10px;
+  margin: 15px;
+  padding: 20px;
+  width: 200px;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(119, 250, 4, 0.2);
+  transition: transform 0.4s, box-shadow 0.2s;
+}
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(119, 250, 4, 0.4);
+}
+.card img {
+  width: 100%;
+  border-radius: 50%;
+}
+
+.card h2 {
+  font-size: 1.2em;
+  margin: 10px 0;
+}
