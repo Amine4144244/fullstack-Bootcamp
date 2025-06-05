@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokénoy - Catch 'em all!</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="/week5/dayThree/challenges/image/logo.png" alt="Pokénoy Logo" class="logo">
+            <h1>Gotta catch 'em all!</h1>
+        </header>
+
+        <div class="pokedex">
+            <div class="pokedex-screen">
+                <div id="loading" class="loading">
+                    <i class="fas fa-spinner fa-spin"></i> Loading...
+                </div>
+                <div id="pokemon-display" class="pokemon-display hidden">
+                    <div class="pokemon-image-container">
+                        <img id="pokemon-image" src="" alt="Pokemon Image" class="pokemon-image">
+                    </div>
+                    <div class="pokemon-info">
+                        <h2 id="pokemon-name">Pikachu</h2>
+                        <p id="pokemon-id">Pokémon n° 25</p>
+                        <p id="pokemon-height">Height: 4cm</p>
+                        <p id="pokemon-weight">Weight: 60gr</p>
+                        <div id="pokemon-types" class="types">
+                            <span class="type electric">electric</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="error-message" class="error-message hidden">
+                    Oh no! That Pokemon isn't available...
+                </div>
+            </div>
+
+            <div class="controls">
+                <button id="prev-btn" class="control-btn">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <button id="random-btn" class="control-btn main-btn">
+                    <i class="fas fa-random"></i>
+                </button>
+                <button id="next-btn" class="control-btn">
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
