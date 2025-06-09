@@ -1,13 +1,13 @@
 const fs = require('fs');
 
-fs.readdir(".",(err, files) => {
-  if (err) {
-    console.error("Error reading directory:", err);
-    return;
-  }
+const directoryPath = '.';
 
-  console.log("Files in the directory:");
-  files.forEach(file => {
+try {
+  const files = fs.readdirSync(directoryPath);
+  console.log('Files in directory:');
+  files.forEach((file) => {
     console.log(file);
   });
-});
+} catch (err) {
+  console.error('Error:', err.message);
+}

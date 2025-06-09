@@ -1,11 +1,12 @@
-import { TodoList } from "./todo.js";
+import { TodoList } from './todo.js';
 
 const myTodoList = new TodoList();
 
-myTodoList.addTask("Buy groceries");
-myTodoList.addTask("Finish coding assignment");
-myTodoList.addTask("Call Alice");
+myTodoList.addTask('Learn JavaScript');
+myTodoList.addTask('Build a project');
+myTodoList.addTask('Go for a walk');
 
-myTodoList.completeTask(1);
+myTodoList.markComplete('Learn JavaScript');
+myTodoList.markComplete('Go for a walk');
 
 myTodoList.listTasks();

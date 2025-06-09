@@ -1,15 +1,20 @@
-const apiURL = "https://api.giphy.com/v1/gifs/search?q=sun&rating=g&api_key=hpvZycW22qCjn5cRM1xtWB8NKq4dQ2My&limit=10&offset=2";
+async function fetchSunGifs() {
+  const apiUrl = 'https://api.giphy.com/v1/gifs/search?q=sun&limit=10&offset=2&rating=g&api_key=hpvZycW22qCjn5cRM1xtWB8NKq4dQ2My';
 
-fetch(apiURL)
-  .then(response => {
+  try {
+    const response = await fetch(apiUrl);
+
     if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
-    return response.json(); 
-  })
-  .then(data => {
-    console.log(data); 
-  })
-  .catch(error => {
-    console.error("Error fetching data:", error);
-  });
+
+    const data = await response.json();
+
+    console.log(data);
+
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+}
+
+fetchSunGifs();

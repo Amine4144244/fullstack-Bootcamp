@@ -1,17 +1,12 @@
-const fs = require("fs");
+const fs = require('fs');
 
-fs.readFile("source.txt", "utf8", (err, data) => {
-  if (err) {
-    console.error("Error reading file:", err);
-    return;
-  }
-  
-  fs.writeFile("destination.txt", data, (err) => {
-    if (err) {
-      console.error("Error writing file:", err);
-      return;
-    }
-    
-    console.log("File copied successfully!");
-  });
-});
+const sourceFile = 'source.txt';
+const destinationFile = 'destination.txt';
+
+try {
+  const data = fs.readFileSync(sourceFile, 'utf8');
+  fs.writeFileSync(destinationFile, data);
+  console.log(`Content copied from "${sourceFile}" to "${destinationFile}"`);
+} catch (err) {
+  console.error('Error:', err.message);
+}

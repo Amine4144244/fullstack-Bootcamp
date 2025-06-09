@@ -3,24 +3,27 @@ export class TodoList {
     this.tasks = [];
   }
 
-  addTask(task) {
-    const newTask = { text: task, completed: false };
-    this.tasks.push(newTask);
+  addTask(taskName) {
+    const task = { name: taskName, completed: false };
+    this.tasks.push(task);
+    console.log(`Task "${taskName}" added!`);
   }
 
-  completeTask(index) {
-    if (index >= 0 && index < this.tasks.length) {
-      this.tasks[index].completed = true;
+  markComplete(taskName) {
+    const task = this.tasks.find((t) => t.name === taskName);
+    if (task) {
+      task.completed = true;
+      console.log(`Task "${taskName}" marked as complete!`);
     } else {
-      console.log("Invalid task index");
+      console.log(`Task "${taskName}" not found!`);
     }
   }
 
   listTasks() {
-    console.log("\nTodo List:");
-    this.tasks.forEach((task, idx) => {
-      const status = task.completed ? "[✔]" : "[ ]";
-      console.log(`${idx + 1}. ${status} ${task.text}`);
+    console.log('\nCurrent Tasks:');
+    this.tasks.forEach((task, index) => {
+      const status = task.completed ? '✅' : '❌';
+      console.log(`${index + 1}. ${task.name} - ${status}`);
     });
   }
 }

@@ -1,4 +1,4 @@
-const products = require("./products");
+const products = require("./products.js");
 
 function findProductByName(productName) {
   const product = products.find(item => item.name.toLowerCase() === productName.toLowerCase());
