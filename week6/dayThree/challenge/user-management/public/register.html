@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Register</title>
+</head>
+<body>
+  <h2>Register</h2>
+  <form id="registerForm">
+    <input type="text" id="name" placeholder="First Name" required><br>
+    <input type="text" id="lastName" placeholder="Last Name" required><br>
+    <input type="email" id="email" placeholder="Email" required><br>
+    <input type="text" id="username" placeholder="Username" required><br>
+    <input type="password" id="password" placeholder="Password" required><br>
+    <button type="submit" id="registerBtn" disabled>Register</button>
+  </form>
+
+  <p id="message"></p>
+
+  <script>
+
+    const form = document.getElementById('registerForm');
+    const btn = document.getElementById('registerBtn');
+    const message = document.getElementById('message');
+
+    function validateForm() {
+      const isFilled = [...form.elements]
+        .filter(el => el.tagName === 'INPUT')
+        .every(el => el.value.trim() !== '');
+      btn.disabled = !isFilled;
+    }
+
+    form.addEventListener('input', validateForm);
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const user = {
+        name: form.name.value,
+        lastName: form.lastName.value,
+        email: form.email.value,
+        username: form.username.value,
+        password: form.password.value
+      };
+
+      const res = await fetch('/users/register', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(user)
+      });
+
+      const msg = await res.text();
+      message.textContent = msg;
+      });  
+  </script>
+</body>
+</html>
