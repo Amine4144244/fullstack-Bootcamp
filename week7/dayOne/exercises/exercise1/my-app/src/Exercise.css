@@ -1,0 +1,17 @@
+.para {
+  background-color: #282c34;
+  color: white;
+  padding: 40px;
+  font-family: Arial;
+  text-align: center;
+}
+
+/* Optional styles */
+img {
+  max-width: 200px;
+  height: auto;
+}
+
+form {
+  margin-top: 20px;
+}
