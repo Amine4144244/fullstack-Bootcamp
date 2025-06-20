@@ -1,0 +1,11 @@
+{
+  "SocialMedias": ["Facebook", "Twitter", "LinkedIn"],
+  "Skills": {
+    "Frontend": ["HTML", "CSS", "React"],
+    "Backend": ["Node", "Express"]
+  },
+  "Experiences": [
+    { "company": "Company A", "years": 2 },
+    { "company": "Company B", "years": 3 }
+  ]
+}
